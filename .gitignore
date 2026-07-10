@@ -1,0 +1,22 @@
+# 环境变量（在 HF Spaces 上用 Secrets 替代）
+.env
+
+# 数据库文件
+data/*.sqlite3
+data/*.sqlite3-wal
+data/*.sqlite3-shm
+
+# 日志
+logs/*.log
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# 系统文件
+.DS_Store
+Thumbs.db

@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  telegram-admin-bot:
+    build: .
+    container_name: telegram-admin-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - bot-data:/app/data
+    ports:
+      - "8080:8080"
+
+volumes:
+  bot-data:
