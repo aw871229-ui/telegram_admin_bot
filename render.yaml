@@ -1,0 +1,16 @@
+services:
+  - type: worker
+    name: telegram-admin-bot
+    env: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+
+      - key: SUPER_ADMINS
+        sync: false
+
+      - key: PRIVATE_MODE
+        value: "true"
