@@ -180,7 +180,9 @@ def target_hint() -> str:
 # ==================== 基础命令 ====================
 
 
-@router.message(Command(["start", "开始"]))
+@router.message(F.text == "开始")
+async def start_cn(message: Message) -> None:
+    await start_cmd(message)
 async def start_cmd(message: Message) -> None:
     await ensure_context(message)
     if message.chat.type == ChatType.PRIVATE:
