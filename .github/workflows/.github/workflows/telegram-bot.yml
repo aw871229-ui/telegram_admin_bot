@@ -1,0 +1,39 @@
+name: Telegram Admin Bot Auto Run
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 每5小时自动启动一次
+    - cron: '0 */5 * * *'
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+
+    env:
+      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      SUPER_ADMINS: ${{ secrets.SUPER_ADMINS }}
+      PRIVATE_MODE: ${{ secrets.PRIVATE_MODE }}
+
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 启动机器人
+        run: |
+          python -m bot.main
+
+      - name: 异常提示
+        if: failure()
+        run: echo "机器人退出，将等待下一次自动启动"
